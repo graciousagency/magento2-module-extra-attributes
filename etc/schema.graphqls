@@ -15,6 +15,6 @@ interface ProductInterface {
 
 interface OrderItemInterface {
     extra_attributes: [ExtraProductAttribute]!
-    @doc(description: "Extra attributes for order item (to have attribute visible here you need to also set to yes on 'Show in order item' in attribute settings)")
+    @doc(description: "Extra attributes for order item (to have attribute visible here you need to also set to yes on 'Visible on Order Item In GraphQL' in attribute settings)")
     @resolver(class: "Gracious\\ExtraAttributes\\Model\\Resolver\\ExtraAttributesResolver")
 }
