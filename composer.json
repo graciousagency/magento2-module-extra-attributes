@@ -3,7 +3,7 @@
     "description": "GraphQL extension for Magento 2 that provides user defined attributes on various entities",
     "type": "magento2-module",
     "license": "GPL-3.0",
-    "version": "102.0.0",
+    "version": "102.0.1",
     "authors": [
         {
             "name": "Peter Grlicky",
