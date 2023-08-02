@@ -1,0 +1,32 @@
+{
+    "name": "gracious/module-extra-attributes",
+    "description": "GraphQL extension for Magento 2 that provides user defined attributes on various entities",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "version": "102.0.0",
+    "authors": [
+        {
+            "name": "Peter Grlicky",
+            "email": "p.grlicky@gracious.nl"
+        },
+        {
+            "name": "Pepijn Blom",
+            "email": "p.blom@gracious.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.1",
+        "magento/framework": ">=102.0.0",
+        "magento/module-catalog-graphql": ">=102.0.0",
+        "magento/module-sales-graphql": ">=102.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Gracious\\ExtraAttributes\\": ""
+        }
+    }
+}

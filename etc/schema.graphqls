@@ -1,0 +1,20 @@
+type ExtraProductAttribute @doc(description: "Extra product attribute from custom attribute set (user defined attributes)") {
+    code: String!
+    @doc(description: "Attribute code")
+    label: String!
+    @doc(description: "Attribute label")
+    value: String!
+    @doc(description: "Attribute value")
+}
+
+interface ProductInterface {
+    extra_attributes: [ExtraProductAttribute]!
+    @doc(description: "Extra attributes for product")
+    @resolver(class: "Gracious\\ExtraAttributes\\Model\\Resolver\\ExtraAttributesResolver")
+}
+
+interface OrderItemInterface {
+    extra_attributes: [ExtraProductAttribute]!
+    @doc(description: "Extra attributes for order item (to have attribute visible here you need to also set to yes on 'Show in order item' in attribute settings)")
+    @resolver(class: "Gracious\\ExtraAttributes\\Model\\Resolver\\ExtraAttributesResolver")
+}

@@ -1,0 +1,7 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="catalog_eav_attribute" resource="default" engine="innodb" comment="Catalog EAV Attribute Table">
+        <column xsi:type="tinyint" name="show_in_order_item" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Determines if the attribute is fetched in extra_attributes on OrderItemInterface in GraphQL"/>
+    </table>
+</schema>
