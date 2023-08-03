@@ -13,10 +13,15 @@ use Magento\Sales\Api\Data\OrderItemInterface;
 
 class ExtraAttributesResolver implements ResolverInterface
 {
+    protected ProductAttributeDataProvider $productDataProvider;
+    protected OrderItemAttributeDataProvider $orderItemDataProvider;
+
     public function __construct(
-        protected readonly ProductAttributeDataProvider $productDataProvider,
-        protected readonly OrderItemAttributeDataProvider $orderItemDataProvider
+        ProductAttributeDataProvider $productDataProvider,
+        OrderItemAttributeDataProvider $orderItemDataProvider
     ) {
+        $this->orderItemDataProvider = $orderItemDataProvider;
+        $this->productDataProvider = $productDataProvider;
     }
 
     public function resolve(
@@ -31,11 +36,14 @@ class ExtraAttributesResolver implements ResolverInterface
         }
 
         $model = $value['model'];
-        $result = match(true) {
-            $model instanceof ProductInterface => $this->productDataProvider->getAttributesBySku($model->getSku()),
-            $model instanceof OrderItemInterface => $this->orderItemDataProvider->getAttributesBySku($model->getSku()),
-            default => throw new LocalizedException(__('"model" should be instance of ProductInterface or OrderItemInterface')),
-        };
+
+        if ($model instanceof ProductInterface::class) {
+            $result = $this->productDataProvider->getAttributesBySku($model->getSku());
+        } elseif ($model instanceof OrderItemInterface::class) {
+            $result = $this->orderItemDataProvider->getAttributesBySku($model->getSku());
+        } else {
+            throw new LocalizedException(__('"model" should be instance of ProductInterface or OrderItemInterface'));
+        }
 
         return array_filter(
             $result,

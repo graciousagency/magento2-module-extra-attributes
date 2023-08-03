@@ -12,16 +12,24 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class ProductAttributeDataProvider extends Template
 {
+    protected StoreManagerInterface $storeManager;
+    protected ProductRepository $productRepository;
+
     public function __construct(
-        protected ProductRepository $productRepository,
+        ProductRepository $productRepository,
         Context $context,
-        protected StoreManagerInterface $storeManager,
+        StoreManagerInterface $storeManager,
         array $data = []
     ) {
+        $this->productRepository = $productRepository;
+        $this->storeManager = $storeManager;
         parent::__construct($context, $data);
     }
 
-    public function getProductBySku(string $sku, int $storeId): ProductInterface|DataObject
+    /**
+     * @return ProductInterface|DataObject
+     */
+    public function getProductBySku(string $sku, int $storeId): object
     {
         return $this->productRepository->get($sku, $storeId);
     }
