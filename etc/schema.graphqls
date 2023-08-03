@@ -5,6 +5,8 @@ type ExtraProductAttribute @doc(description: "Extra product attribute from custo
     @doc(description: "Attribute label")
     value: String!
     @doc(description: "Attribute value")
+    type: String!
+    @doc(description: "Attribute type")
 }
 
 interface ProductInterface {

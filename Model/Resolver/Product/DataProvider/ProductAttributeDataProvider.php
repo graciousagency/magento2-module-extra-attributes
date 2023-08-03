@@ -33,7 +33,7 @@ class ProductAttributeDataProvider extends Template
         $product = $this->getProductBySku($sku, $storeId);
         $attributes = $product->getAttributes();
 
-        $attributes_data = [];
+        $attributeData = [];
         $x = 0;
 
         /** @var Attribute $attribute */
@@ -42,13 +42,13 @@ class ProductAttributeDataProvider extends Template
                 continue;
             }
             $frontend = $attribute->getFrontend();
-            $attributes_data[$x]['code'] = $attribute->getAttributeCode();
-            $attributes_data[$x]['label'] = $attribute->getStoreLabel($storeId);
-            $attributes_data[$x]['value'] = $frontend->getValue($product);
+            $attributeData[$x]['code'] = $attribute->getAttributeCode();
+            $attributeData[$x]['label'] = $attribute->getStoreLabel($storeId);
+            $attributeData[$x]['value'] = $frontend->getValue($product);
+            $attributeData[$x]['type'] = $frontend->getInputType();
             $x++;
         }
 
-        return $attributes_data;
-
+        return $attributeData;
     }
 }
