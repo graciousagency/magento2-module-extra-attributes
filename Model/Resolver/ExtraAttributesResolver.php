@@ -37,9 +37,9 @@ class ExtraAttributesResolver implements ResolverInterface
 
         $model = $value['model'];
 
-        if ($model instanceof ProductInterface::class) {
+        if ($model instanceof ProductInterface) {
             $result = $this->productDataProvider->getAttributesBySku($model->getSku());
-        } elseif ($model instanceof OrderItemInterface::class) {
+        } elseif ($model instanceof OrderItemInterface) {
             $result = $this->orderItemDataProvider->getAttributesBySku($model->getSku());
         } else {
             throw new LocalizedException(__('"model" should be instance of ProductInterface or OrderItemInterface'));
