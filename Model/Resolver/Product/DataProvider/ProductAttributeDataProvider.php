@@ -38,7 +38,11 @@ class ProductAttributeDataProvider extends Template
     public function getAttributesBySku(string $sku): array
     {
         $storeId = $this->storeManager->getStore()->getId();
-        $product = $this->getProductBySku($sku, $storeId);
+        try{
+            $product = $this->getProductBySku($sku, $storeId);
+        }catch (\Throwable $e){
+            return [];
+        }
         $attributes = $product->getAttributes();
 
         $attributeData = [];
