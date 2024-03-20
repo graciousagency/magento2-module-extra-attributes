@@ -46,21 +46,28 @@ class ProductAttributeDataProvider extends Template
         $attributes = $product->getAttributes();
 
         $attributeData = [];
-        $x = 0;
 
         /** @var Attribute $attribute */
         foreach ($attributes as $attribute) {
+
             if (!$attribute->getData('is_user_defined') || !$attribute->getData('is_visible_on_front')) {
                 continue;
             }
+
             $frontend = $attribute->getFrontend();
-            $attributeData[$x]['code'] = $attribute->getAttributeCode();
-            $attributeData[$x]['label'] = $attribute->getStoreLabel($storeId);
-            $attributeData[$x]['value'] = $frontend->getValue($product);
-            $attributeData[$x]['type'] = $frontend->getInputType();
-            $x++;
+            $type = $frontend->getInputType();
+            $code = $attribute->getAttributeCode();
+            $value = 'boolean' === $type  ? (bool)$product->getData($code) ? 'Yes' : 'No' : $frontend->getValue($product);
+
+            $attributeData[] = [
+                'code' => $code,
+                'label' => $attribute->getStoreLabel($storeId),
+                'type' => $type,
+                'value' => $value
+            ];
         }
 
         return $attributeData;
     }
+
 }
