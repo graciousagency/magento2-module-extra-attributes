@@ -7,6 +7,19 @@ type ExtraProductAttribute @doc(description: "Extra product attribute from custo
     @doc(description: "Attribute value")
     type: String!
     @doc(description: "Attribute type")
+    @deprecated(reason: "Use proper value field in the meta structure")
+    meta: ExtraAttributeMeta!
+    @doc(description: "Attribute metadata")
+}
+
+type ExtraAttributeMeta {
+    storefront_properties: ExtraProductAttributeStorefrontProperties!
+    @doc(description: "Attribute storefront metadata for display options")
+}
+
+type ExtraAttributeStorefrontProperties {
+    position: Int! @doc(description: "Display position of the attribtue")
+    input_type: String
 }
 
 interface ProductInterface {

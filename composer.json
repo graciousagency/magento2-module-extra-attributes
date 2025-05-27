@@ -1,31 +1,37 @@
 {
-    "name": "gracious/magento2-module-extra-attributes",
-    "description": "GraphQL extension for Magento 2 that provides user defined attributes on various entities",
-    "type": "magento2-module",
-    "license": "GPL-3.0",
-    "authors": [
-        {
-            "name": "Peter Grlicky",
-            "email": "p.grlicky@gracious.nl"
-        },
-        {
-            "name": "Pepijn Blom",
-            "email": "p.blom@gracious.nl"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": ">=7.4",
-        "magento/framework": ">=103.0.0",
-        "magento/module-catalog-graph-ql": ">=100.0.0",
-        "magento/module-sales-graph-ql": ">=100.0.0"
+  "name": "gracious/magento2-module-extra-attributes",
+  "description": "GraphQL extension for Magento 2 that provides user defined attributes on various entities",
+  "type": "magento2-module",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Peter Grlicky",
+      "email": "p.grlicky@gracious.nl"
     },
-    "autoload": {
-        "files": [
-            "registration.php"
-        ],
-        "psr-4": {
-            "Gracious\\ExtraAttributes\\": ""
-        }
+    {
+      "name": "Pepijn Blom",
+      "email": "p.blom@gracious.nl"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.4",
+    "magento/framework": ">=103.0.0",
+    "magento/module-catalog-graph-ql": ">=100.0.0",
+    "magento/module-sales-graph-ql": ">=100.0.0"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Gracious\\ExtraAttributes\\": ""
+    }
+  },
+  "repositories": {
+    "0": {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  }
 }

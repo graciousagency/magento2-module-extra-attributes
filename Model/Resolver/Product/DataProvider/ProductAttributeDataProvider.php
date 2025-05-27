@@ -2,6 +2,7 @@
 
 namespace Gracious\ExtraAttributes\Model\Resolver\Product\DataProvider;
 
+use Gracious\ExtraAttributes\Model\Resolver\AttributeMetaDataFactory;
 use Magento\Backend\Block\Template\Context;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\ProductRepository;
@@ -14,13 +15,16 @@ class ProductAttributeDataProvider extends Template
 {
     protected StoreManagerInterface $storeManager;
     protected ProductRepository $productRepository;
+    protected AttributeMetaDataFactory $metadataFactory;
 
     public function __construct(
+        AttributeMetaDataFactory $metadataFactory,
         ProductRepository $productRepository,
         Context $context,
         StoreManagerInterface $storeManager,
         array $data = []
     ) {
+        $this->metadataFactory = $metadataFactory;
         $this->productRepository = $productRepository;
         $this->storeManager = $storeManager;
         parent::__construct($context, $data);
@@ -63,7 +67,8 @@ class ProductAttributeDataProvider extends Template
                 'code' => $code,
                 'label' => $attribute->getStoreLabel($storeId),
                 'type' => $type,
-                'value' => $value
+                'value' => $value,
+                'meta' => $this->metadataFactory->getAttributeMetaDataStructure($attribute, $product, $storeId),
             ];
         }
 

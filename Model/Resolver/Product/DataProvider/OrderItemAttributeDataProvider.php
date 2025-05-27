@@ -2,6 +2,7 @@
 
 namespace Gracious\ExtraAttributes\Model\Resolver\Product\DataProvider;
 
+use Gracious\ExtraAttributes\Model\Resolver\AttributeMetaDataFactory;
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
 use Magento\Backend\Block\Template\Context;
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -14,13 +15,16 @@ class OrderItemAttributeDataProvider extends Template
 {
     protected StoreManagerInterface $storeManager;
     protected ProductRepository $productRepository;
+    protected AttributeMetaDataFactory $metadataFactory;
 
     public function __construct(
+        AttributeMetaDataFactory $metadataFactory,
         ProductRepository $productRepository,
         Context $context,
         StoreManagerInterface $storeManager,
         array $data = []
     ) {
+        $this->metadataFactory = $metadataFactory;
         $this->productRepository = $productRepository;
         $this->storeManager = $storeManager;
         parent::__construct($context, $data);
@@ -53,6 +57,7 @@ class OrderItemAttributeDataProvider extends Template
             $attributeData[$x]['label'] = $attribute->getStoreLabel($storeId);
             $attributeData[$x]['value'] = $frontend->getValue($product);
             $attributeData[$x]['type'] = $frontend->getInputType();
+            $attributeData[$x]['meta'] = $this->metadataFactory->getAttributeMetaDataStructure($attribute, $product, $storeId);
             $x++;
         }
 
