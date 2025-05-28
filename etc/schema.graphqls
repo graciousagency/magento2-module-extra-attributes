@@ -13,7 +13,7 @@ type ExtraProductAttribute @doc(description: "Extra product attribute from custo
 }
 
 type ExtraAttributeMeta {
-    storefront_properties: ExtraProductAttributeStorefrontProperties!
+    storefront_properties: ExtraAttributeStorefrontProperties!
     @doc(description: "Attribute storefront metadata for display options")
 }
 
